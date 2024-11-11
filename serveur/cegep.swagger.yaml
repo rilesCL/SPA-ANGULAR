@@ -1,0 +1,1104 @@
+swagger: "2.0"
+# Possibilité pour générateur
+# npm install -g redoc-cli
+# Generateur redoc-cli bundle -o index.html swagger.json
+# npm install -g bootprint
+# npm install -g bootprint-base
+# npm install -g bootprint-swagger
+# npm install -g bootprint-openapi
+## Autre test
+# npm install -g @apidevtools/swagger-cli
+### Autre test
+# npm install -g swagger-tools
+
+info:
+  title: Cegep
+  description: API pour le cours 345 et 456
+  version: 1.0.2024
+#host: localhost:8080
+### Pour utiliser la version serverless (Certain API ne sont pas encore porté dans cette environnement)
+#host: us-central1-cegep-al.cloudfunctions.net
+#basePath: /
+### Pour utiliser la version server
+##host: cegep.fdtt.space
+##host: localhost:8080
+## host: us-central1-tpweb3.cloudfunctions.net
+host: us-central1-cegep-al.cloudfunctions.net
+#basePath: /v1
+#### Definition des securités
+securityDefinitions:
+   # Authorization: abcdef12345
+   APIKeyHeader:
+     type: apiKey
+     in: header
+     name: Authorization
+schemes:
+  - https
+  #- http
+paths:
+  /session:
+    post:
+      summary: Recupere un token du serveur valide pour 4 heures
+      parameters:
+        - in: body
+          name: parameters
+          description: Votre username et password
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+              password:
+                type: string
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Token valide pour 4 heures
+          schema:
+            type: string
+            description: Token
+            example: "ccbc5558902adb39585c11b89eae5464abf5c4a653dc9b2bff669003b88c91af"
+    delete:
+      summary: Detruit le token du serveur
+      security:
+        - APIKeyHeader: []
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Token fut detruit
+          schema:
+            type: object
+            properties:
+              data:
+                type: string
+                description: Token
+              error:
+                type: string
+                description: Message d'erreur si il y a lieu
+  /secret:
+    get:
+      summary: Fourni une chaine si le token authenticite est valide. Permet de tester si le token est valide
+      description: Dans un Json.
+      security:
+        - APIKeyHeader: []
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  valid:
+                    type: boolean
+                    description: Vrai si authenticite est valide
+                  owner:
+                    type: string
+                    description: Username of the owner 
+                  message:
+                    type: string
+                    description: 42 est la reponse a tout!
+  /create-user:
+    post:
+      summary: Crée un utilisateur 
+      parameters:
+        - in: body
+          name: parameters
+          description: Votre username et password
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+              password:
+                type: string
+              email:
+                type: string
+              key:
+                type: string
+                description: Clef secret pour permettre la creation d'un utilisateur
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Réponse de confirmation
+          schema:
+            type: object
+            properties:
+              data:
+                type: string
+                description: Token
+              error:
+                type: string
+                description: Message d'erreur si il y a lieu
+  /test:
+    get:
+      summary: Fait un test
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Réponse de confirmation
+          schema:
+            type: object
+            properties:
+              msg:
+                type: string
+                description: 42 est la reponse a tout!
+    post:
+      summary: Fait un test, 75% de chance de retourner une erreur
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Réponse de confirmation
+          schema:
+            type: object
+            properties:
+              msg:
+                type: string
+                description: 42 est la reponse a tout!
+  /error:
+    get:
+      summary: Retourne une erreur
+      produces:
+        - application/json
+      responses:
+        418:
+          description: Réponse de confirmation
+          schema:
+            type: object
+            properties:
+              error:
+                type: integer
+                description: Code d'erreur
+              message:
+                type: string
+                description: Message d'erreur
+  /journal/{character_id}:
+    get:
+      summary: Retourne le journal du personnage 
+      parameters:
+        - in: path
+          name: character_id
+          required: true
+          type: string
+          description: Identificateur du personnage
+      description: Dans un Json.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+
+  /recipes:
+    get:
+      summary: Retourne une liste de recettes. (Future)
+      description: Dans un Json.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+    post:
+      summary: Ajoute une recette
+      security:
+        - APIKeyHeader: []
+      parameters:
+        - in: body
+          name: recettes
+          description: Une recette a ajouter
+          schema:
+            type: object
+            properties:
+              title:
+                type: string
+              description:
+                type: string
+              feeds_this_many:
+                type: integer
+              preparation_time:
+                type: integer
+              ingredients:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    ingredient:
+                      type: string
+                    measure:
+                      type: string
+              instructions:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    instruction:
+                      type: string
+                    photo:
+                      type: string
+              cover_photo:
+                type: string
+              keywords:
+                type: array
+                items:
+                  type: string
+      responses:
+        201:
+          description: Created
+    patch:
+      summary: Modify une recette (Future)
+      security:
+        - APIKeyHeader: []
+      parameters:
+        - in: body
+          name: recettes
+          description: Une recette modifier
+          schema:
+            type: object
+            properties:
+              id:
+                type: number
+              title:
+                type: string
+              description:
+                type: string
+              feeds_this_many:
+                type: integer
+              preparation_time:
+                type: integer
+              ingredients:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    ingredient:
+                      type: string
+                    measure:
+                      type: string
+              instructions:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    instruction:
+                      type: string
+                    photo:
+                      type: string
+              cover_photo:
+                type: string
+              keywords:
+                type: array
+                items:
+                  type: string
+      responses:
+        201:
+          description: Created
+  /recipes/{receipe_id}:
+    get:
+      summary: Retourne une liste de recettes. (Future)
+      parameters:
+        - in: path
+          name: receipe_id
+          required: true
+          type: integer
+          minimum: 0
+          description: Identificateur de la recette
+      description: Dans un Json.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+    delete:
+      summary: Effact une recette. (Future)
+      security:
+        - APIKeyHeader: []
+      parameters:
+        - in: path
+          name: receipe_id
+          required: true
+          type: integer
+          minimum: 0
+          description: Identificateur de la recette
+      description: Dans un Json.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+  /contact/{username}:
+    get:
+      summary: Recupere tous les messages recu pour l'etudiant, 
+      parameters:
+        - in: path
+          name: username
+          required: true
+          type: string
+          description: Numero d'etudiant
+      security:
+        - APIKeyHeader: []
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    userid:
+                      type: string
+                    message:
+                      type: string
+                    nom:
+                      type: string
+                    prenom:
+                      type: string
+                    telephone:
+                      type: string
+                    create_date:
+                      type: object
+                      properties:
+                        value:
+                          type: string
+                          description: Format 2023-11-27T02:39:45.220Z
+    put:
+      summary: Recoit des commentaires.
+      parameters:
+        - in: path
+          name: username
+          required: true
+          type: string
+          description: Identificateur de l'usager
+        - in: body
+          name: parameters
+          description: Information a sauvegarder peut etre different
+          schema:
+            type: object
+            properties:
+              nom:
+                type: string
+                description: Token
+              prenom:
+                type: string
+                description: Token
+              email:
+                type: string
+                description: Token
+              telephone:
+                type: string
+                description: Token
+              message:
+                type: string
+                description: Token
+      description: Dans un Json.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+  /contact/{username}/{create_date}:
+    delete:
+      summary: Efface un message
+      parameters:
+        - in: path
+          name: username
+          required: true
+          type: string
+          description: Numero d'etudiant
+        - in: path
+          name: create_date
+          required: true
+          type: string
+          description: Date de creation du message
+      security:
+        - APIKeyHeader: []
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+  /contacts_count/{username}:
+    get:
+      summary: Indique le nombre de messages pour cet etudiant, 
+      parameters:
+        - in: path
+          name: username
+          required: true
+          type: string
+          description: ID utilisateur
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  msgs_count:
+                    type: integer
+                    description: Nombre de messages
+
+  /characters:
+    get:
+      summary: Retourne une liste des personnages disponibles
+      description: Dans un Json.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+  /character:
+    get:
+      summary: Retourne les détails des personnages pour la session courante
+      description: Dans un Json.
+      security:
+        - APIKeyHeader: []
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+    post:
+      summary: Cree un personnage
+      security:
+        - APIKeyHeader: []
+      parameters:
+        - in: body
+          name: personnage
+          description: Une personnage a ajouter
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              statistics:
+                type: object
+                properties:
+                  str:
+                    type: integer
+                  dex:
+                    type: integer
+                  con:
+                    type: integer
+                  int:
+                    type: integer
+                  wis:
+                    type: integer
+                  cha:
+                    type: integer
+              money:
+                type: integer
+                description: Argent du personnage
+              level:
+                type: integer
+              health:
+                type: integer
+              currentHealth:
+                type: integer
+              image:
+                type: string
+              synopsis:
+                type: string
+              class:
+                type: string
+              subclass:
+                type: string
+              race:
+                type: string
+              alignment:
+                type: string
+      responses:
+        201:
+          description: Created
+  /health/{character_id}:
+    patch:
+      summary: Change les points de vie du personnage 
+      security:
+        - APIKeyHeader: []
+      parameters:
+        - in: path
+          name: character_id
+          required: true
+          type: string
+          description: Identificateur du personnage
+        - in: body
+          name: personnage
+          description: Une personnage a ajouter
+          schema:
+            type: object
+            properties:
+              currentHealth:
+                type: integer
+      description: Dans un Json.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+  /character/{character_id}:
+    get:
+      summary: Retourne les détails du personnage 
+      parameters:
+        - in: path
+          name: character_id
+          required: true
+          type: string
+          description: Identificateur du personnage
+      description: Dans un Json.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+    delete:
+      summary: Retire un personnage. IMPORTANT CECI NE RETIRERA PAS LES TRAITS, EQUIPMENT ET SORT POUR CE PERSONNAGE
+      security:
+        - APIKeyHeader: []
+      parameters:
+        - in: path
+          name: character_id
+          required: true
+          type: string
+          description: Identificateur du personnage
+      responses:
+        200:
+          description: Deleted
+  /traits/{character_id}:
+    get:
+      summary: Retourne les traits du personnage 
+      parameters:
+        - in: path
+          name: character_id
+          required: true
+          type: string
+          description: Identificateur du personnage
+      description: Dans un Json.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+    post:
+      summary: Ajoute un trait pour le personnage
+      security:
+        - APIKeyHeader: []
+      parameters:
+        - in: path
+          name: character_id
+          required: true
+          type: string
+          description: Identificateur du personnage
+        - in: body
+          name: trait
+          description: Une trait a ajouter
+          schema:
+            type: object
+            properties:
+              reference:
+                type: string
+              name:
+                type: string
+              description:
+                type: string
+      responses:
+        201:
+          description: Created
+  /trait/{character_id}/{trait_id}:
+    delete:
+      summary: Retire un trait pour le personnage
+      security:
+        - APIKeyHeader: []
+      parameters:
+        - in: path
+          name: character_id
+          required: true
+          type: string
+          description: Identificateur du personnage
+        - in: path
+          name: trait_id
+          required: true
+          type: string
+          description: Identificateur du trait
+      responses:
+        200:
+          description: Deleted
+  /equipments/{character_id}:
+    get:
+      summary: Retourne les equipments du personnage 
+      parameters:
+        - in: path
+          name: character_id
+          required: true
+          type: string
+          description: Identificateur du personnage
+      description: Dans un Json.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+    post:
+      summary: Ajoute un equipement au personnage. NOTE FUTURE :le personnage doit avoir l'argent
+      security:
+        - APIKeyHeader: []
+      parameters:
+        - in: path
+          name: character_id
+          required: true
+          type: string
+          description: Identificateur du personnage
+        - in: body
+          name: trait
+          description: equipement a ajouter
+          schema:
+            type: object
+            properties:
+              reference:
+                type: string
+              qty:
+                type: integer
+              equipped:
+                type: boolean
+      responses:
+        201:
+          description: Created
+  /equipment/{character_id}/{equipment_id}:
+    delete:
+      summary: Retire un equipment pour le personnage
+      security:
+        - APIKeyHeader: []
+      parameters:
+        - in: path
+          name: character_id
+          required: true
+          type: string
+          description: Identificateur du personnage
+        - in: path
+          name: equipment_id
+          required: true
+          type: string
+          description: Identificateur de l'equipment
+      responses:
+        200:
+          description: Deleted
+  /spells/{character_id}:
+    get:
+      summary: Retourne les equipments du personnage 
+      parameters:
+        - in: path
+          name: character_id
+          required: true
+          type: string
+          description: Identificateur du personnage
+      description: Dans un Json.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+    post:
+      summary: Ajoute un spell pour le personnage
+      security:
+        - APIKeyHeader: []
+      parameters:
+        - in: path
+          name: character_id
+          required: true
+          type: string
+          description: Identificateur du personnage
+        - in: body
+          name: spell
+          description: Une spell a ajouter
+          schema:
+            type: object
+            properties:
+              reference:
+                type: string
+              qty:
+                type: integer
+      responses:
+        201:
+          description: Created
+  /spell/{character_id}/{spell_id}:
+    delete:
+      summary: Retire un sort pour le personnage
+      security:
+        - APIKeyHeader: []
+      parameters:
+        - in: path
+          name: character_id
+          required: true
+          type: string
+          description: Identificateur du personnage
+        - in: path
+          name: spell_id
+          required: true
+          type: string
+          description: Identificateur de sort
+      responses:
+        200:
+          description: Deleted
+  /getalldata/{character_id}:
+    get:
+      summary: Retourne les tous les information pour un personnage 
+      parameters:
+        - in: path
+          name: character_id
+          required: true
+          type: string
+          description: Identificateur du personnage
+      description: Dans un Json.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+  /random_words:
+    get:
+      summary: Retourne une liste de mots.
+      description: Tableau de string.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+              data:
+                type: array
+                items: 
+                  multipleOf: 5
+                  type: string
+  /results:
+    get:
+      summary: Recupere un tableau des resultats.
+      description: Dans un Json.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: array
+            items: 
+              multipleOf: 5
+              type: object
+              properties:
+                email:
+                  type: string
+                prenom:
+                  type: string
+                nom:
+                  type: string
+                temps_millisecond:
+                  type: integer
+    post:
+      summary: Transmet les resultats.
+      parameters:
+        - in: body
+          name: recettes
+          description: Ajoute un resultat
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              prenom:
+                type: string
+              nom:
+                type: string
+              temps_millisecond:
+                type: integer
+      description: Dans un Json.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+  /aide2024/{langue}/{section}:
+    get:
+      summary: Retourne une section
+      parameters:
+        - in: path
+          name: langue
+          required: true
+          type: string
+          minimum: 0
+          description: préfix de langue
+        - in: path
+          name: section
+          required: true
+          type: string
+          minimum: 0
+          description: Nom de la section
+      description: Dans un Json.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+  /aide2024/{langue}:
+    get:
+      summary: Retourne l'aide pour une langue
+      parameters:
+        - in: path
+          name: langue
+          required: true
+          type: string
+          minimum: 0
+          description: préfix de langue
+      description: Dans un Json.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+  /aide2024:
+    get:
+      summary: Retourne l'aide pour toutes les langues
+      description: Dans un Json.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+
+
+
+
+  /commentaire:
+    get:
+      summary: Récupère les commentaires, 
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    userid:
+                      type: string
+                    message:
+                      type: string
+                    rating:
+                      type: integer
+                    date:
+                      type: object
+                      properties:
+                        value:
+                          type: string
+                          description: Format 2023-11-27T02:39:45.220Z
+                    id:
+                      type: string
+    post:
+      summary: Crée un commentaires.
+      security:
+        - {}
+        - APIKeyHeader: []
+      parameters:
+        - in: body
+          name: parameters
+          description: Information a sauvegarder peut etre different
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                description: Message de l'utilisateur
+              rating:
+                type: integer
+                description: Note fourni
+      description: Dans un Json.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+  /commentaire/{id}:
+    delete:
+      summary: Efface un commentaire
+      parameters:
+        - in: path
+          name: id
+          required: true
+          type: string
+          description: Id du commentaire à effacer
+      security:
+        - APIKeyHeader: []
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+  /nb-commentaires:
+    get:
+      summary: Indique le nombre de commentaires, 
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  msgs_count:
+                    type: integer
+                    description: Nombre de commentaires reçus
+
+  /activite:
+    get:
+      summary: Récupère l'activité courante si elle existe,
+      security:
+        - APIKeyHeader: []
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    userid:
+                      type: string
+                    description:
+                      type: string
+                    id:
+                      type: string
+                    debut:
+                      type: object
+                      properties:
+                        value:
+                          type: string
+                          description: Format 2023-11-27T02:39:45.220Z
+    post:
+      summary: Démarrer une activité
+      security:
+        - APIKeyHeader: []
+      parameters:
+        - in: body
+          name: parameters
+          description: Information a sauvegarder peut etre different
+          schema:
+            type: object
+            properties:
+              description:
+                type: string
+                description: Tache qui sera effectué
+      description: Dans un Json.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+    put:
+      summary: Crée une activité
+      security:
+        - APIKeyHeader: []
+      parameters:
+        - in: body
+          name: parameters
+          description: Information a sauvegarder peut etre different
+          schema:
+            type: object
+            properties:
+              description:
+                type: string
+                description: Description de l'activité
+              start:
+                type: string
+                description: Date et heure du début de l'activité
+              end:
+                type: string
+                description: Date et heure de la fin de l'activité
+      description: Dans un Json.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+    delete:
+      summary: Terminer une activité
+      security:
+        - APIKeyHeader: []
+      description: Dans un Json.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+
+  /activites:
+    get:
+      summary: Récupère toutes les activite pour l'utilisateur
+      security:
+        - APIKeyHeader: []
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+              data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    userid:
+                      type: string
+                    description:
+                      type: string
+                    id:
+                      type: string
+                    debut:
+                      type: object
+                      properties:
+                        value:
+                          type: string
+                          description: Format 2023-11-27T02:39:45.220Z
+                    fin:
+                      type: object
+                      properties:
+                        value:
+                          type: string
+                          description: Format 2023-11-27T02:39:45.220Z

@@ -1,0 +1,38 @@
+<div class="container-fluid">
+    <div class="row">
+<div class="col-12">
+    <div class="form-floating">
+        <textarea 
+        class="form-control" 
+        placeholder="Leave a comment here" 
+        id="floatingTextarea2" 
+        style="height: 100px"
+        [(ngModel)]="message.contenu"
+        ></textarea>
+        <label for="floatingTextarea2">Comments</label>
+      </div>
+</div>
+<div class="col-6">
+    <app-etoiles
+    (ratingChange)="message.rating=$event"
+    [rating]="message.rating"
+    [canBeModified]="true"
+    ></app-etoiles>
+
+</div>
+<div class="col-3 ms-auto">
+    <div class="row me-1 my-2">
+
+        <button class="btn btn-primary"
+        [disabled]="!message.contenu || message.rating === 0"
+         (click)="ajouterMessage()">
+         @if (minimize) {
+             <i class="bi bi-arrow-return-left"></i>
+         } @else {
+             Envoyer
+         }
+         </button>
+    </div>
+</div>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+<!--@if (enregistrement) {
+  <app-enregistrement
+    (newEnregistrement)="enregistrement=false"
+  ></app-enregistrement>
+} @else {
+<div class="container-fluid">
+  <div class="row ">
+    <div class="col-md-2 col-1  fixed-top g-0">
+      @if (menuCompact) {
+        <app-navigation-compacte 
+        (vueCompact)="toggleVue()"></app-navigation-compacte>
+     } @else {
+         <app-navigation 
+         (vueCompact)="toggleVue()" 
+         (vueSelection)="setNavigation($event)"
+         (creerCompteEvent)="creerCompte()"
+         ></app-navigation>
+     }
+     
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-10 ms-auto"
+    [ngClass]="
+    {
+      'col-12': menuCompact,
+      'col-10': !menuCompact
+      }
+      "
+    >
+      @switch (navigation) {
+        @case ('intro') {
+          <app-intro></app-intro>
+        }
+        @case ('commentaires') {
+          <app-commentaires
+            [minimize]="menuCompact"
+          ></app-commentaires>
+        }
+        @case ('aide') {
+          <app-aide></app-aide>
+        }
+        @default {
+          <app-intro></app-intro>
+        }
+      }
+    
+    </div>
+  </div>
+</div>
+}
+-->
+<router-outlet></router-outlet>

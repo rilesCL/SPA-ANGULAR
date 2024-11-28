@@ -1,0 +1,13 @@
+<div class="container-fluid"></div>
+<div class="row">
+    <div 
+    [ngClass]="{
+        'col-7 ms-auto': minimize,
+        'col-12': !minimize
+    }">
+        <app-message (newMessage)="ajouterMessage($event)" [minimize]="minimize"></app-message>
+    </div>
+    <div class="col-12">
+        <app-vue-messages [messages]="messages"></app-vue-messages>
+    </div>
+</div>

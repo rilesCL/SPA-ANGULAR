@@ -1,0 +1,23 @@
+<h1>Composants:</h1>
+<div class="container">
+    <div class="row">
+        @for (composant of composants | keyvalue; track $index) {
+            <div class="col-md-6 col-lg-4 col-12">
+                <h4>{{composant.key}}</h4>
+            </div> 
+            <div class="col-md-6 col-lg-8 col-12">
+                <p>{{composant.value}}</p>
+            </div>
+        }
+        <!-- Alternative sans utilisation de pipe
+        @for (composant of getComposantKeys(); track $index) {
+            <div class="col-md-3 col-12">
+                <h4>{{composant}}</h4>
+            </div> 
+            <div class="col-md-9 col-12">
+                <p>{{composants[composant]}}</p>
+            </div>
+        }
+        -->
+    </div>
+</div>

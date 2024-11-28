@@ -1,0 +1,246 @@
+<h1 class="display-3 text-center">enregistrement</h1>
+<div class="container-fluid">
+   <form #registrationForm="ngForm">
+       <div class="row w-75 mx-auto">
+          <!--NOM-->
+        <div class="col-12 col-md-6">
+            <mat-form-field appearance="fill" class="w-100">
+                <mat-label i18n>Nom</mat-label>
+                <input matInput
+                    [(ngModel)]="enregistrement.nom"
+                    name="nom"
+                    required
+                    #nom="ngModel"
+                    pattern="^[A-Za-zÀ-ÿ\s]*$"
+                    minlength="2"
+                    (input)="validateNom()">
+                <mat-error i18n>
+                    Le nom doit contenir au moins 2 caractères et ne pas contenir de chiffres
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+          <!--PRENOM-->
+<div class="col-12 col-md-6">
+    <mat-form-field appearance="fill" class="w-100">
+        <mat-label i18ns>Prénom</mat-label>
+        <input matInput
+               [(ngModel)]="enregistrement.prenom"
+               name="prenom"
+               required
+               #prenom="ngModel"
+               pattern="^[A-Za-zÀ-ÿ\s]*$"
+               minlength="2"
+               (input)="validatePrenom()">
+        <mat-error i18n>
+            Le prénom doit contenir au moins 2 caractères et ne pas contenir de chiffres
+        </mat-error>
+    </mat-form-field>
+</div>
+
+<!--COURRIEL-->
+<div class="col-12">
+    <mat-form-field appearance="fill" class="w-100">
+        <mat-label i18n>Courriel</mat-label>
+        <input matInput
+               type="email"
+               [(ngModel)]="enregistrement.courriel"
+               name="courriel"
+               required
+               #courriel="ngModel"
+               pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
+               (input)="validateCourriel()">
+        <mat-error i18n>
+            Veuillez entrer une adresse courriel valide
+        </mat-error>
+    </mat-form-field>
+</div>
+
+          <!--NUMERO-->
+<div class="col-2">
+    <mat-form-field appearance="fill" class="w-100">
+        <mat-label i18n>Numéro</mat-label>
+        <input matInput
+               [(ngModel)]="enregistrement.adresse.numero"
+               name="numero"
+               required
+               #numero="ngModel"
+               pattern="^[0-9]+$"
+               (input)="validateNumero()">
+        <mat-error i18n>
+            Le numéro doit être un nombre
+        </mat-error>
+    </mat-form-field>
+</div>
+
+<!--RUE-->
+<div class="col-10">
+    <mat-form-field appearance="fill" class="w-100">
+        <mat-label i18n>Rue</mat-label>
+        <input matInput
+               [(ngModel)]="enregistrement.adresse.rue"
+               name="rue"
+               required
+               #rue="ngModel"
+               minlength="10"
+               (input)="validateRue()">
+        <mat-error i18n>
+            La rue doit contenir plus de 10 caractères
+        </mat-error>
+    </mat-form-field>
+</div>
+
+<!--VILLE-->
+<div class="col-12 col-md-4">
+    <mat-form-field appearance="fill" class="w-100">
+        <mat-label i18n>Ville</mat-label>
+        <input matInput
+               [(ngModel)]="enregistrement.adresse.ville"
+               name="ville"
+               required
+               #ville="ngModel"
+               minlength="5"
+               (input)="validateVille()">
+        <mat-error i18n>
+            La ville doit contenir plus de 5 caractères
+        </mat-error>
+    </mat-form-field>
+</div>
+
+<!--PAYS-->
+<div class="col-12 col-md-2">
+    <mat-form-field appearance="fill" class="w-100">
+        <mat-label i18n>Pays</mat-label>
+        <mat-select [(ngModel)]="enregistrement.adresse.pays" 
+                    name="pays" 
+                    required
+                    #pays="ngModel">
+            <mat-option value="canada">Canada</mat-option>
+            <mat-option value="us">États-Unis</mat-option>
+        </mat-select>
+        <mat-error i18n>
+            Le pays est requis
+        </mat-error>
+    </mat-form-field>
+</div>
+
+<!--PROVINCE/ÉTAT-->
+<div class="col-12 col-md-3">
+    @if (enregistrement.adresse.pays === 'canada') {
+        <mat-form-field appearance="fill" class="w-100">
+            <mat-label>Province</mat-label>
+            <mat-select [(ngModel)]="enregistrement.adresse.province"
+                        name="province"
+                        required
+                        #province="ngModel">
+                <mat-option value="QC">Québec</mat-option>
+                <mat-option value="ON">Ontario</mat-option>
+                <mat-option value="BC">Colombie-Britannique</mat-option>
+                <mat-option value="AB">Alberta</mat-option>
+            </mat-select>
+            <mat-error i18n>
+                La province est requise
+            </mat-error>
+        </mat-form-field>
+    } @else {
+        <mat-form-field appearance="fill" class="w-100">
+            <mat-label i18n>État</mat-label>
+            <mat-select [(ngModel)]="enregistrement.adresse.etat"
+                        name="etat"
+                        required
+                        #etat="ngModel">
+                <mat-option value="NY">New York</mat-option>
+                <mat-option value="CA">California</mat-option>
+                <mat-option value="TX">Texas</mat-option>
+            </mat-select>
+            <mat-error i18n>
+                L'état est requis
+            </mat-error>
+        </mat-form-field>
+    }
+</div>
+
+<!--CODE POSTAL/ZIP-->
+<div class="col-12 col-md-3">
+    @if (enregistrement.adresse.pays === 'canada') {
+        <mat-form-field appearance="fill" class="w-100">
+            <mat-label i18n>Code Postal</mat-label>
+            <input matInput
+                   [(ngModel)]="enregistrement.adresse.codePostal"
+                   name="codePostal"
+                   required
+                   #codePostal="ngModel"
+                   pattern="^[A-Za-z]\d[A-Za-z] \d[A-Za-z]\d$"
+                   (input)="validateCodePostal()">
+            <mat-error i18n>
+                Format invalide (ex: A1A 1A1)
+            </mat-error>
+        </mat-form-field>
+    } @else {
+        <mat-form-field appearance="fill" class="w-100">
+            <mat-label>ZIP</mat-label>
+            <input matInput
+                   [(ngModel)]="enregistrement.adresse.zip"
+                   name="zip"
+                   required
+                   #zip="ngModel"
+                   pattern="^\d{5}$"
+                   (input)="validateZip()">
+            <mat-error i18n>
+                Le code ZIP doit contenir 5 chiffres
+            </mat-error>
+        </mat-form-field>
+    }
+</div>
+
+<!--MOT DE PASSE-->
+<div class="col-12 col-md-6">
+    <mat-form-field appearance="fill" class="w-100">
+        <mat-label i18n>Mot de passe</mat-label>
+        <input matInput
+               type="password"
+               [(ngModel)]="enregistrement.motdepasse"
+               name="motdepasse"
+               required
+               #motdepasse="ngModel"
+               minlength="8"
+               (input)="validateMotDePasse()">
+        <mat-error i18n>
+            Le mot de passe doit contenir au moins 8 caractères
+        </mat-error>
+    </mat-form-field>
+</div>
+
+<!--CONFIRMATION MOT DE PASSE-->
+<div class="col-12 col-md-6">
+    <mat-form-field appearance="fill" class="w-100">
+        <mat-label i18n>Confirmation du mot de passe</mat-label>
+        <input matInput
+               type="password"
+               [(ngModel)]="enregistrement.confirmation"
+               name="confirmation"
+               required
+               #confirmation="ngModel"
+               [pattern]="enregistrement.motdepasse || ''"
+               (input)="validateConfirmation()">
+        <mat-error i18n>
+            Les mots de passe ne correspondent pas
+        </mat-error>
+    </mat-form-field>
+</div>
+
+<div class="mx-auto col-3">
+    <button type="submit" 
+            class="btn btn-primary m-2"
+            [disabled]="!registrationForm.form.valid"
+            (click)="enregistrer()" i18n>
+        Soumettre
+    </button>
+    <button type="button" 
+            class="btn btn-danger m-2"
+            (click)="annuler()" i18n>
+        Annuler
+    </button>
+</div>
+   
+</div>

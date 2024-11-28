@@ -1,0 +1,16 @@
+@for (message of messages; track $index) {
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card m-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{message.auteur}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{message.date | date: 'short'}}</h6>
+                        <p class="card-text">{{message.contenu}}</p>
+                        <app-etoiles [rating]="message.rating"></app-etoiles>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="fr-CA" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="5363451304863092478" datatype="html">
+        <source>Nom</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/enregistrement/enregistrement.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6430157771777622547" datatype="html">
+        <source> Le nom doit contenir au moins 2 caractères et ne pas contenir de chiffres </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/enregistrement/enregistrement.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4602590280676135802" datatype="html">
+        <source> Le prénom doit contenir au moins 2 caractères et ne pas contenir de chiffres </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/enregistrement/enregistrement.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8268021232951468752" datatype="html">
+        <source>Courriel</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/enregistrement/enregistrement.component.html</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2386152484145824232" datatype="html">
+        <source> Veuillez entrer une adresse courriel valide </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/enregistrement/enregistrement.component.html</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1002620282969236754" datatype="html">
+        <source>Numéro</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/enregistrement/enregistrement.component.html</context>
+          <context context-type="linenumber">62</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3367657368885551427" datatype="html">
+        <source> Le numéro doit être un nombre </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/enregistrement/enregistrement.component.html</context>
+          <context context-type="linenumber">71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6331689590256006962" datatype="html">
+        <source>Rue</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/enregistrement/enregistrement.component.html</context>
+          <context context-type="linenumber">79</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6421192426654784488" datatype="html">
+        <source> La rue doit contenir plus de 10 caractères </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/enregistrement/enregistrement.component.html</context>
+          <context context-type="linenumber">88</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5407759070423985131" datatype="html">
+        <source>Ville</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/enregistrement/enregistrement.component.html</context>
+          <context context-type="linenumber">96</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6344741710737612817" datatype="html">
+        <source> La ville doit contenir plus de 5 caractères </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/enregistrement/enregistrement.component.html</context>
+          <context context-type="linenumber">105</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7135345516243177577" datatype="html">
+        <source>Pays</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/enregistrement/enregistrement.component.html</context>
+          <context context-type="linenumber">113</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5217883750601009032" datatype="html">
+        <source> Le pays est requis </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/enregistrement/enregistrement.component.html</context>
+          <context context-type="linenumber">122</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7426028571599548593" datatype="html">
+        <source> La province est requise </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/enregistrement/enregistrement.component.html</context>
+          <context context-type="linenumber">142</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3480682536108319081" datatype="html">
+        <source>État</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/enregistrement/enregistrement.component.html</context>
+          <context context-type="linenumber">147</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7117465484917574701" datatype="html">
+        <source> L&apos;état est requis </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/enregistrement/enregistrement.component.html</context>
+          <context context-type="linenumber">157</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1604940704694402552" datatype="html">
+        <source>Code Postal</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/enregistrement/enregistrement.component.html</context>
+          <context context-type="linenumber">167</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1440939732764799534" datatype="html">
+        <source> Format invalide (ex: A1A 1A1) </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/enregistrement/enregistrement.component.html</context>
+          <context context-type="linenumber">176</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8770799404785580276" datatype="html">
+        <source> Le code ZIP doit contenir 5 chiffres </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/enregistrement/enregistrement.component.html</context>
+          <context context-type="linenumber">190</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5249891717669571568" datatype="html">
+        <source>Mot de passe</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/enregistrement/enregistrement.component.html</context>
+          <context context-type="linenumber">199</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8000266710362630505" datatype="html">
+        <source> Le mot de passe doit contenir au moins 8 caractères </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/enregistrement/enregistrement.component.html</context>
+          <context context-type="linenumber">209</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7964738508287969727" datatype="html">
+        <source>Confirmation du mot de passe</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/enregistrement/enregistrement.component.html</context>
+          <context context-type="linenumber">217</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="410106855648844702" datatype="html">
+        <source> Les mots de passe ne correspondent pas </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/enregistrement/enregistrement.component.html</context>
+          <context context-type="linenumber">227</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="196688175149667183" datatype="html">
+        <source> Soumettre </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/enregistrement/enregistrement.component.html</context>
+          <context context-type="linenumber">237,238</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5036641628193411364" datatype="html">
+        <source> Annuler </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/enregistrement/enregistrement.component.html</context>
+          <context context-type="linenumber">242,243</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="welcomeTitle" datatype="html">
+        <source>Bienvenue !</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/intro/intro.component.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3789440271209124363" datatype="html">
+        <source>Bienvenue dans notre application de gestion de temps. Veuillez vous connecter ou créer un compte pour commencer à gérer votre temps efficacement.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/intro/intro.component.html</context>
+          <context context-type="linenumber">5,9</context>
+        </context-group>
+        <note priority="1" from="description">Description de la page d&apos;accueil</note>
+        <note priority="1" from="meaning">welcome message</note>
+      </trans-unit>
+      <trans-unit id="3324412928825966444" datatype="html">
+        <source>Commentaires</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/navigation/navigation.component.html</context>
+          <context context-type="linenumber">23,24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="7869356423919656180" datatype="html">
+        <source>Capture</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/navigation/navigation.component.html</context>
+          <context context-type="linenumber">27,28</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6360657045945199389" datatype="html">
+        <source>Rapport</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/navigation/navigation.component.html</context>
+          <context context-type="linenumber">31,32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1902100407096396858" datatype="html">
+        <source>Categories</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/navigation/navigation.component.html</context>
+          <context context-type="linenumber">35,36</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1481336755220229950" datatype="html">
+        <source>Aide</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/navigation/navigation.component.html</context>
+          <context context-type="linenumber">39,40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="3387197750091991711" datatype="html">
+        <source>Quitter</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/navigation/navigation.component.html</context>
+          <context context-type="linenumber">60,61</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6159324994195550267" datatype="html">
+        <source>Entrer</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/navigation/navigation.component.html</context>
+          <context context-type="linenumber">68,69</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4765439965811877229" datatype="html">
+        <source>Créer compte</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/navigation/navigation.component.html</context>
+          <context context-type="linenumber">70,71</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6254211172347840343" datatype="html">
+        <source> Vous avez été déconnecté avec succès <x id="START_TAG_BUTTON" ctype="x-button" equiv-text="&lt;button type=&quot;button&quot; class=&quot;btn-close&quot; (click)=&quot;showLogoutMessage = false&quot;&gt;"/><x id="CLOSE_TAG_BUTTON" ctype="x-button" equiv-text="&lt;/button&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/navigation/navigation.component.html</context>
+          <context context-type="linenumber">80,82</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="354228924403878453" datatype="html">
+        <source>Oops! Page introuvable</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/page-not-found/page-not-found.component.html</context>
+          <context context-type="linenumber">4,5</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8293190334513321141" datatype="html">
+        <source>Désolé, cette page n&apos;existe pas.</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/page-not-found/page-not-found.component.html</context>
+          <context context-type="linenumber">5,6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="8478678154862317281" datatype="html">
+        <source> URL copiée ! <x id="START_TAG_BUTTON" ctype="x-button" equiv-text="&lt;button type=&quot;button&quot; class=&quot;btn-close&quot; 
+                  (click)=&quot;showCopyMessage = false&quot;&gt;"/><x id="CLOSE_TAG_BUTTON" ctype="x-button" equiv-text="&lt;/button&gt;"/></source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/page-not-found/page-not-found.component.html</context>
+          <context context-type="linenumber">22,27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1457601777100620343" datatype="html">
+        <source> Retour à l&apos;accueil </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/components/page-not-found/page-not-found.component.html</context>
+          <context context-type="linenumber">33,34</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

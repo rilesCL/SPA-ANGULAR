@@ -1,0 +1,34 @@
+.sidebar {
+    background-color: #343a40; /* Couleur de fond sombre */
+    transition: background-color 0.3s ease; /* Transition pour le changement de couleur */
+}
+
+.sidebar:hover {
+    background-color: #495057; /* Couleur plus claire au survol */
+}
+
+.nav-item {
+    padding: 10px 15px; /* Ajout de padding pour un espacement confortable */
+    transition: background-color 0.2s; /* Transition pour l'effet de survol */
+}
+
+.nav-item:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Effet de survol */
+}
+
+.nav-link {
+    transition: color 0.3s; /* Transition pour le changement de couleur */
+}
+
+.nav-link:hover {
+    color: #007bff; /* Couleur du lien au survol */
+}
+
+.btn-outline-danger {
+    border-color: #dc3545; /* Couleur du bouton */
+}
+
+.btn-outline-danger:hover {
+    background-color: #dc3545; /* Couleur de fond du bouton au survol */
+    color: white; /* Couleur du texte au survol */
+}

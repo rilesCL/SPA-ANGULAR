@@ -1,0 +1,36 @@
+<div class="container mt-5 text-center">
+    <div class="card p-4 mb-4 mx-auto" style="max-width: 400px;">
+      <div class="display-1 text-danger mb-3">404</div>
+      <h3 i18n>Oops! Page introuvable</h3>
+      <p i18n>Désolé, cette page n'existe pas.</p>
+    </div>
+
+    <!-- URL copiable -->
+    <div class="mb-4">
+      <p>URL actuelle: <code>{{currentUrl}}</code></p>
+      <button class="btn btn-secondary" 
+              [cdkCopyToClipboard]="currentUrl"
+              (click)="showCopyMessage = true">
+        Copier l'URL
+      </button>
+    </div>
+
+    <!-- Messages d'aide portables -->
+    <ng-container *cdkPortal>
+      @if (showCopyMessage) {
+        <div class="alert alert-success position-fixed bottom-0 end-0 m-3" i18n>
+          URL copiée !
+          <button type="button" class="btn-close" 
+                  (click)="showCopyMessage = false">
+          </button>
+        </div>
+      }
+    </ng-container>
+
+    <!-- Bouton de navigation -->
+    <div class="mt-4">
+      <button class="btn btn-primary me-2" (click)="goHome()" i18n>
+        Retour à l'accueil
+      </button>
+    </div>
+  </div>

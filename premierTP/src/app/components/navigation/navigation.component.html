@@ -1,0 +1,88 @@
+<div class="container-fluid">
+    <div class="row">
+      <!-- sidebar -->
+      <div class="col-2 sidebar bg-dark vh-100 flex-column d-flex p-3 fixed-top">
+          <div class="row mb-4">
+              <div class="col-10">
+                  <a class="navbar-brand text-white d-block mx-auto text-start bottom-border" 
+                     (click)="selectionVue('intro')" 
+                     style="cursor: pointer;">
+                      TP GHILAS
+                  </a>
+              </div>
+              <div class="col-2 text-end" (click)="toggleVue()" style="cursor: pointer;">
+                  <i class="bi bi-caret-left-square text-white"></i>
+              </div>
+          </div>
+          <div class="row col-5 mx-auto mb-4" (click)="selectionVue('intro')">
+              <!-- <img src="../../../../../assets/images/logo.png" width="100" class="rounded-circle mx-auto img-fluid"> -->
+          </div>
+          <ul class="navbar-nav flex-column mt-4">
+              <li class="nav-item mb-3" (click)="selectionVue('commentaires')" style="cursor: pointer;">
+                  <i class="bi bi-chat-left-dots text-white"></i>
+                  <a class="nav-link text-white d-none d-md-inline ms-2" i18n>Commentaires</a>
+              </li>
+              <li class="nav-item mb-3">
+                  <i class="bi bi-card-text text-secondary"></i>
+                  <a class="nav-link text-secondary d-none d-md-inline disabled ms-2" i18n>Capture</a>
+              </li>
+              <li class="nav-item mb-3">
+                  <i class="bi bi-bar-chart-line text-secondary"></i>
+                  <a class="nav-link text-secondary d-none d-md-inline disabled ms-2" i18n>Rapport</a>
+              </li>
+              <li class="nav-item mb-3">
+                  <i class="bi bi-file-ruled text-secondary"></i>
+                  <a class="nav-link text-secondary d-none d-md-inline disabled ms-2" i18n>Categories</a>
+              </li>
+              <li class="nav-item mb-3" (click)="selectionVue('aide')" style="cursor: pointer;">
+                  <i class="bi bi-question text-white"></i>
+                  <a class="nav-link text-white d-none d-md-inline ms-2" i18n>Aide</a>
+              </li>
+          </ul>
+          <div class="align-items-end mt-auto d-md-inline d-md-none">
+              <ul class="navbar-nav flex-column">
+                  <li class="nav-item">
+                      <i class="bi bi-person-fill text-white" (click)="activePanel()"></i>
+                  </li>
+              </ul>
+          </div>
+
+          @if (sessionExist) {
+              <div class="align-items-end mt-auto p-3 bg-warning rounded" tabindex="0" (blur)="restorePanel()">
+                  <p class="text-dark fw-bold">John Smith</p>
+                  <ul class="navbar-nav flex-column">
+                      <li class="nav-item mb-2">
+                          <i class="bi bi-person-lines-fill text-dark"></i>
+                          <a class="nav-link text-dark d-none d-md-inline disabled ms-2">Profile</a>
+                      </li>
+                     
+                    </ul>
+                  <button class="btn btn-outline-danger my-3" (click)="quitterSession()" i18n>Quitter</button>
+              </div>
+          } @else {
+              <div class="align-items-end mt-auto p-3 bg-secondary rounded" tabindex="0" (blur)="restorePanel()">
+                  <input type="text" class="form-control my-1" placeholder="Courriel" [(ngModel)]="courriel">
+                  <input type="password" class="form-control my-1" placeholder="Password" [(ngModel)]="motDePasse">
+                  <button class="btn btn-outline-primary my-1" 
+                          [disabled]="courriel.length == 0 || motDePasse.length == 0" 
+                          (click)="sessionExist = true" i18n>Entrer</button>
+                  <div class="my-2">
+                      <a (click)="creerCompte()" class="text-white" style="cursor: pointer" i18n>Créer compte</a>
+                  </div>
+              </div>
+          }
+
+         
+
+          <ng-template #logoutMessagePortal>
+              @if(showLogoutMessage) {
+                  <div class="alert alert-info alert-dismissible fade show" role="alert" i18n>
+                      Vous avez été déconnecté avec succès
+                      <button type="button" class="btn-close" (click)="showLogoutMessage = false"></button>
+                  </div>
+              }
+          </ng-template>
+      </div>
+    </div>
+  </div>
+    <!-- end of sidebar -->

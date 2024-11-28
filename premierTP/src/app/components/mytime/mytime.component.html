@@ -1,0 +1,14 @@
+<div class="container-fluid">
+    <div class="row">
+        <div [ngClass]="compact ? 'col-1' : 'col-2'" class="g-0">
+            @if (compact) {
+                <app-navigation-compacte></app-navigation-compacte>
+            } @else {
+                <app-navigation></app-navigation>
+            }
+        </div>
+        <div [ngClass]="compact ? 'col-11 ms-auto' : 'col-10 ms-auto'">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

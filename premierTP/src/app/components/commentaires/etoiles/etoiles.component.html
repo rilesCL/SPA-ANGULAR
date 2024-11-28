@@ -1,0 +1,3 @@
+@for (et of etoiles; track $index) {
+    <i class="bi bi-star-fill" (click)="setRating($index+1)" [ngClass]="{'text-warning': $index < rating}"></i>
+}

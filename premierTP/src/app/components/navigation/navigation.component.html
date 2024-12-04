@@ -23,13 +23,15 @@
                   <a class="nav-link text-white d-none d-md-inline ms-2" i18n>Commentaires</a>
               </li>
               <li class="nav-item mb-3">
-                  <i class="bi bi-card-text text-secondary"></i>
-                  <a class="nav-link text-secondary d-none d-md-inline disabled ms-2" i18n>Capture</a>
-              </li>
-              <li class="nav-item mb-3">
-                  <i class="bi bi-bar-chart-line text-secondary"></i>
-                  <a class="nav-link text-secondary d-none d-md-inline disabled ms-2" i18n>Rapport</a>
-              </li>
+                <i class="bi bi-card-text" [class.text-secondary]="!sessionExist" [class.text-white]="sessionExist"></i>
+                <a class="nav-link d-none d-md-inline ms-2" [class.text-secondary]="!sessionExist" 
+                   [class.text-white]="sessionExist" [class.disabled]="!sessionExist">Capture</a>
+            </li>
+            <li class="nav-item mb-3">
+                <i class="bi bi-bar-chart-line" [class.text-secondary]="!sessionExist" [class.text-white]="sessionExist"></i>
+                <a class="nav-link d-none d-md-inline ms-2" [class.text-secondary]="!sessionExist" 
+                   [class.text-white]="sessionExist" [class.disabled]="!sessionExist">Rapport</a>
+            </li>
               <li class="nav-item mb-3">
                   <i class="bi bi-file-ruled text-secondary"></i>
                   <a class="nav-link text-secondary d-none d-md-inline disabled ms-2" i18n>Categories</a>
@@ -49,7 +51,7 @@
 
           @if (sessionExist) {
               <div class="align-items-end mt-auto p-3 bg-warning rounded" tabindex="0" (blur)="restorePanel()">
-                  <p class="text-dark fw-bold">John Smith</p>
+                  <p class="text-dark fw-bold">{{ currentUser }}</p>
                   <ul class="navbar-nav flex-column">
                       <li class="nav-item mb-2">
                           <i class="bi bi-person-lines-fill text-dark"></i>
@@ -65,7 +67,7 @@
                   <input type="password" class="form-control my-1" placeholder="Password" [(ngModel)]="motDePasse">
                   <button class="btn btn-outline-primary my-1" 
                           [disabled]="courriel.length == 0 || motDePasse.length == 0" 
-                          (click)="sessionExist = true" i18n>Entrer</button>
+                          (click)="login()" i18n>Entrer</button>
                   <div class="my-2">
                       <a (click)="creerCompte()" class="text-white" style="cursor: pointer" i18n>Créer compte</a>
                   </div>

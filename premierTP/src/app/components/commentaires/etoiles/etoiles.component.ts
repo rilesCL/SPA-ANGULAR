@@ -13,7 +13,7 @@ export class EtoilesComponent {
   @Input() rating!: number;
   @Input() canBeModified: boolean = false;
 
-  setRating(rating: number) {
+  setRating(rating: number) {1
     if (this.canBeModified) {
     this.rating = rating;
     this.ratingChange.emit(rating);

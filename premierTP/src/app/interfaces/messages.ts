@@ -1,7 +1,9 @@
 export interface IMessage {
-    id: number;
-    contenu: string;
-    rating: number;
-    date: Date;
-    auteur: string;
+    userid: string;    // vide pour anonyme
+    message: string;   // contenu du message
+    rating: number;    // nombre d'étoiles
+    date: {
+        value: string;
+    };
+    id: string;       // identifiant unique
 }

@@ -4,9 +4,21 @@
             <div class="col-12">
                 <div class="card m-3">
                     <div class="card-body">
-                        <h5 class="card-title">{{message.auteur}}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{message.date | date: 'short'}}</h6>
-                        <p class="card-text">{{message.contenu}}</p>
+                        <div class="d-flex justify-content-between">
+                            <h5 class="card-title">
+                                {{message.userid ? message.userid : 'Anonyme'}}
+                            </h5>
+                            @if (canDeleteMessage(message)) {
+                                <button class="btn btn-link text-danger" 
+                                        (click)="deleteMessage(message.id)">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            }
+                        </div>
+                        <h6 class="card-subtitle mb-2 text-muted">
+                            {{message.date.value | date: 'short'}}
+                        </h6>
+                        <p class="card-text">{{message.message}}</p>
                         <app-etoiles [rating]="message.rating"></app-etoiles>
                     </div>
                 </div>

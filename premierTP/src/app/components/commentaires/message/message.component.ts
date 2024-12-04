@@ -3,6 +3,8 @@ import { IMessage } from '../../../interfaces/messages';
 import { FormsModule } from '@angular/forms';
 import { EtoilesComponent } from '../etoiles/etoiles.component';
 import { NgClass } from '@angular/common';
+import { Console, error } from 'console';
+import { MessageService } from '../../../services/message.service';
 
 @Component({
   selector: 'app-message',
@@ -15,27 +17,29 @@ export class MessageComponent {
   @Output() newMessage = new EventEmitter<IMessage>();
   @Input() minimize!: boolean;
 
-  message: IMessage = {
-    id: 0,
+  message = {
     contenu: '',
-    rating: 0,
-    date: new Date(),
-    auteur: ''
+    rating: 0
   };
 
-  ajouterMessage() {
-    this.message.date = new Date();
-    this.message.id = Math.floor(Math.random() * 1000);
-    this.message.auteur = 'Anonyme';
-    console.log(this.message);
-    this.newMessage.emit(this.message);
-    this.message = {
-      id: 0,
-      contenu: '',
-      rating: 0,
-      date: new Date(),
-      auteur: ''
-    };
-  }
+  constructor(private messageService: MessageService) {}
 
+  ajouterMessage() {
+    if (this.message.contenu && this.message.rating > 0) {
+      this.messageService.postMessage(this.message.contenu, this.message.rating).subscribe({
+        next:() => {
+          console.log('Message ajouté avec succès');
+
+          // Reset the form
+          this.message = {
+            contenu: '',
+            rating: 0
+          };
+      },
+      error: (error) => {
+        console.error('Erreur lors de l\'ajout du message', error);
+      }
+    });
+}
+}
 }

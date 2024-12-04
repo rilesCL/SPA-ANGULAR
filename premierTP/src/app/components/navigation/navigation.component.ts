@@ -11,7 +11,7 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-navigation',
   standalone: true,
-  imports: [FormsModule, NgClass, RouterLink, RouterModule, AuthService],
+  imports: [FormsModule, NgClass, RouterLink, RouterModule],
   templateUrl: './navigation.component.html',
   styleUrl: './navigation.component.css'
 })
@@ -26,8 +26,48 @@ export class NavigationComponent {
   forcePanelActif = false;
   showLogoutMessage = false;
 
-  constructor(private router: Router) {}
+ // Ajouter une propriété pour le nom d'utilisateur courant
+  currentUser: string | null = null;
 
+  constructor(
+    private router: Router,
+    private authService: AuthService
+) {
+    this.authService.getCurrentUser().subscribe({
+        next: (username) => {
+            this.sessionExist = !!username;
+            if (username) {
+                this.currentUser = username;
+                console.log('Utilisateur connecté:', username);
+            }
+        },
+        error: (error) => {
+            console.error('Erreur de récupération utilisateur:', error);
+        }
+    });
+}
+          
+        
+
+        login() {
+          console.log('Tentative de connexion avec:', this.courriel, this.motDePasse); // Pour déboguer
+          this.authService.login(this.courriel, this.motDePasse).subscribe({
+            next: () => {
+              console.log('Connexion réussie !');
+
+
+              this.courriel = '';
+              this.motDePasse = '';
+              this.sessionExist = true;
+            },
+            error: (error) => {
+              console.error('Erreur de connexion', error);
+              this.sessionExist = false;
+            }
+          });
+        }
+  
+        
 
   toggleVue() {
     const currentUrl = this.router.url.split('?')[0]; // Obtient l'URL sans paramètres
@@ -68,9 +108,16 @@ export class NavigationComponent {
   
 
 
-  quitterSession() {
-    this.sessionExist = false;
-    this.showLogoutMessage = true;
-  }
 
+  // on modifie la méthode de déconnexion
+  quitterSession() {
+    this.authService.logout().subscribe({
+      next: () => {
+        this.showLogoutMessage = true;
+      },
+      error: (error) => {
+        console.error('Erreur de déconnexion:', error);
+      }
+    });
+  }
 }

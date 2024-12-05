@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { RouterLink } from '@angular/router';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { MessageService } from '../../services/message.service';
 
 
 
@@ -26,12 +27,16 @@ export class NavigationComponent {
   forcePanelActif = false;
   showLogoutMessage = false;
 
+  commentCount: number = 0;
+
+
  // Ajouter une propriété pour le nom d'utilisateur courant
   currentUser: string | null = null;
 
   constructor(
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private messageService: MessageService
 ) {
     this.authService.getCurrentUser().subscribe({
         next: (username) => {
@@ -45,6 +50,17 @@ export class NavigationComponent {
             console.error('Erreur de récupération utilisateur:', error);
         }
     });
+    this.messageService.getMessagesCount().subscribe({
+      next: (response) => {
+        console.log('Response a regarder:', response[0].commentaires);  
+        this.commentCount = response[0].commentaires;
+      },
+      error: (error) => {
+          console.error('Erreur compteur:', error);
+      }
+  });
+  
+
 }
           
         

@@ -50,18 +50,14 @@ canDeleteMessage(message: any): boolean {
           message.userid === this.currentUser);
 }
 
-deleteMessage(id: string) {if(!this.canDeleteMessage(id)) {
-  console.log('Vous n\'êtes pas autorisé à supprimer ce message',  this.currentUser, id);
-  return;
-}
-  this.messageService.deleteMessage(id).subscribe({
-    next: () => {
-      console.log('Message supprimé avec succès');
-      this.loadMessages(); // Recharger les messages
-    },
-    error: (error) => {
-      console.error('Erreur lors de la suppression:', error);
-    }
+deleteMessage(id: string) {  const token = localStorage.getItem('token');
+  const headers = { 'Authorization': token || '' };
+
+  this.messageService.deleteMessage(id, headers).subscribe({
+      next: () => {
+          this.loadMessages();
+      },
+      error: (error) => console.error('Erreur:', error)
   });
 }
 }

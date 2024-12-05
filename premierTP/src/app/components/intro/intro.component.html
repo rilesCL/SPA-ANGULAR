@@ -1,9 +1,36 @@
 <div class="container-fluid">
     <div class="row justify-content-center align-items-center vh-100">
         <div class="col-md-5 welcome-container">
-            <h1 i18n="@@welcomeTitle">Bienvenue !</h1>
-            <p i18n="welcome message|Description de la page d'accueil">Bienvenue dans notre application de gestion de temps. Veuillez vous connecter ou créer un compte pour
-                commencer à gérer votre temps efficacement.</p>
+            <div class="container">
+              <div class="terminal_toolbar">
+                <div class="butt">
+                  <button class="btn btn-color"></button>
+                  <button class="btn"></button>
+                  <button class="btn"></button>
+                </div>
+                <p class="user"></p>
+                <div class="add_tab">+</div>
+              </div>
+              <div class="terminal_body">
+                <div class="terminal_prompt">
+                  <span class="terminal_user">ghilasyyWeb:</span>
+                  <span class="terminal_location">~</span>
+                  <span class="terminal_bling">$</span>
+                  <span class="terminal_cursor"></span>
+                </div>
+                <div class="terminal_output">
+                  <pre class="output_text">Welcome to Terminal</pre>
+                  <pre>Bienvenue dans notre application de gestion de temps.</pre>
+                  <pre>Veuillez vous connecter ou créer un compte</pre>
+                  <pre>pour commencer à gérer votre temps efficacement.</pre>
+                </div>
+                <div class="terminal_input">
+                  <input placeholder="Type a command..." class="input_text" type="text" />
+                </div>
+              </div>
+            </div>
+            
         </div>
     </div>
 </div>
+

@@ -16,11 +16,13 @@ export class MessageService {
 }
 
   postMessage(message:string, rating:number): Observable<any> {
-  return this.http.post(`${this.apiUrl}/commentaire`, {message, rating});
+    const token = localStorage.getItem('token');
+    const headers = { 'Authorization': token || '' };
+  return this.http.post(`${this.apiUrl}/commentaire`, {message, rating},{ headers });
   }
 
-  deleteMessage(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/commentaire/${id}`);
+  deleteMessage(id: string, headers:any): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/commentaire/${id}`, { headers });
   }
 
   getMessagesCount(): Observable<any> {

@@ -25,7 +25,7 @@
                 </span>
                 <a class="nav-link text-white d-none d-md-inline ms-2">Commentaires</a>
              </li>
-              <li class="nav-item mb-3">
+              <li class="nav-item mb-3" (click)="selectionVue('capture')">
                 <i class="bi bi-card-text" [class.text-secondary]="!sessionExist" [class.text-white]="sessionExist"></i>
                 <a class="nav-link d-none d-md-inline ms-2" [class.text-secondary]="!sessionExist" 
                    [class.text-white]="sessionExist" [class.disabled]="!sessionExist">Capture</a>

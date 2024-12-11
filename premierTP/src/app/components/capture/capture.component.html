@@ -1,0 +1,48 @@
+<div class="container mt-4">
+    <!-- Description pour nouvelle activité -->
+    <mat-form-field class="w-100">
+      <mat-label>Description de l'activité</mat-label>
+      <input matInput [(ngModel)]="description" name="description">
+    </mat-form-field>
+
+    <!-- Bouton démarrer/arrêter -->
+    @if (!currentActivity) {
+      <button mat-raised-button color="primary" 
+              [disabled]="!description"
+              (click)="demarrerActivite()">
+        Démarrer une tâche
+      </button>
+    } @else {
+      <button mat-raised-button color="warn"
+              (click)="arreterActivite()">
+        Terminer la tâche
+      </button>
+    }
+
+    <!-- Formulaire d'entrée manuelle -->
+    <div class="mt-4">
+      <h3>Entrée manuelle</h3>
+      <form #manualForm="ngForm">
+        <mat-form-field class="w-100">
+          <mat-label>Description</mat-label>
+          <input matInput [(ngModel)]="manualEntry.description" name="description" required>
+        </mat-form-field>
+
+        <mat-form-field class="w-100">
+          <mat-label>Date/heure début</mat-label>
+          <input matInput type="datetime-local" [(ngModel)]="manualEntry.start" name="start" required>
+        </mat-form-field>
+
+        <mat-form-field class="w-100">
+          <mat-label>Date/heure fin</mat-label>
+          <input matInput type="datetime-local" [(ngModel)]="manualEntry.end" name="end" required>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" 
+                [disabled]="!manualForm.valid"
+                (click)="createManualEntry()">
+          Ajouter l'entrée
+        </button>
+      </form>
+    </div>
+  </div>

@@ -8,7 +8,7 @@
                 <mat-label i18n>Nom</mat-label>
                 <input matInput
                     [(ngModel)]="enregistrement.nom"
-                    name="nom"
+                    name="username"
                     required
                     #nom="ngModel"
                     pattern="^[A-Za-zÀ-ÿ\s]*$"
@@ -45,7 +45,7 @@
         <input matInput
                type="email"
                [(ngModel)]="enregistrement.courriel"
-               name="courriel"
+               name="email"
                required
                #courriel="ngModel"
                pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"

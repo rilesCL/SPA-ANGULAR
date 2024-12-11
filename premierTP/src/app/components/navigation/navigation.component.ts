@@ -103,6 +103,9 @@ export class NavigationComponent {
           case 'aide':
             this.router.navigate(['/mytime/aide']);
             break;
+            case 'capture':
+              this.router.navigate(['/mytime/capture']);
+              break;
   }
 
   }

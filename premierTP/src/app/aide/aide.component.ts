@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { aide } from '../../aide';
 import { ComposantsComponent } from './composants/composants.component';
 import { FonctionnementComponent } from './fonctionnement/fonctionnement.component';
+import { ActivatedRoute } from '@angular/router';
 
 
 export interface IVue {
@@ -36,4 +37,9 @@ export interface IAideHome {
 export class AideComponent {
   myAide = JSON.parse(aide).application;
 
+  constructor(
+    private route : ActivatedRoute
+  ) {
+ //   this.route.queryParams
+  }
 }

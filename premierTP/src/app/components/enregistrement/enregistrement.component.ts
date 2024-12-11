@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { MatButton } from '@angular/material/button';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user.service';
+import { IUserCreate } from '../../interfaces/user.interface';
 
 
 
@@ -56,6 +58,11 @@ export interface IEnregistrement {
 export class EnregistrementComponent {
   @Output() newEnregistrement = new EventEmitter<IEnregistrement | undefined>();
 
+  constructor(
+    private router: Router,
+    private userService: UserService
+  ) {}
+
   enregistrement: IEnregistrement = {
     nom: '',
     prenom: '',
@@ -81,7 +88,6 @@ export class EnregistrementComponent {
   motDePasseInvalide = false;
   confirmationInvalide = false;
 
-  constructor(private router: Router) {}
 
  
   validateNom() {
@@ -144,11 +150,35 @@ export class EnregistrementComponent {
 
 //FIN DE LA PARTIE DU TP 2
 
-  enregistrer() {
-    console.log(this.enregistrement);
-    this.newEnregistrement.emit(this.enregistrement);
-    this.router.navigate(['/mytime']);
+enregistrer() {
+  console.log('Début de la méthode enregistrer');
+  
+  if (!this.nomInvalide && !this.prenomInvalide && !this.courrielInvalide && 
+    !this.motDePasseInvalide && !this.confirmationInvalide) {
+    const userData: IUserCreate = {
+      username: this.enregistrement.prenom.toLowerCase(),
+      password: this.enregistrement.motdepasse || '',
+      email: this.enregistrement.courriel,
+      key: 'cal41202'
+    };
+
+    console.log('Données à envoyer:', userData);
+
+    this.userService.createUser(userData).subscribe({
+      next: (response) => {
+        console.log('Réponse du serveur:', response);
+        console.log('Utilisateur créé avec succès');
+        this.router.navigate(['/mytime']);
+      },
+      error: (error) => {
+        console.error('Erreur détaillée:', error);
+      }
+    });
+  } else {
+    console.log('Formulaire invalide');
   }
+}
+
 
   annuler() {
     this.newEnregistrement.emit(undefined);

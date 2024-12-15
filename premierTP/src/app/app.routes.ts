@@ -6,6 +6,10 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 import { MytimeComponent } from './components/mytime/mytime.component';
 import { AideComponent } from './aide/aide.component';
 import { CaptureComponent } from './components/capture/capture.component';
+import { AuthGuard } from './guard/auth.guard';
+import { RapportComponent } from './components/rapport/rapport.component';
+import path from 'path';
+import { ProfilComponent } from './components/profil/profil.component';
 
 export const routes: Routes = [
     
@@ -14,7 +18,15 @@ export const routes: Routes = [
     children: [
         {path: '', component: IntroComponent},
         {path: 'comments', component: CommentairesComponent},
-        {path: 'capture', component: CaptureComponent},
+        {path: 'capture', component: CaptureComponent,
+            canActivate: [AuthGuard]
+        },
+        {path: 'rapport', component: RapportComponent,
+            canActivate: [AuthGuard]
+         },
+        { path: 'profil', component: ProfilComponent
+            
+         },
         {path: 'aide', component: AideComponent
             ,children: [ { path: '', redirectTo: 'general', pathMatch: 'full' },
           { path: ':topic', component: AideComponent },

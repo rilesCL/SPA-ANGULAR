@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environments';
 import { HttpClient } from '@angular/common/http';
 import { IUserCreate } from '../interfaces/user.interface';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -20,13 +21,22 @@ export class UserService {
     });
   }
 
-  getUserProfile(){
+  getUserProfile() {
     const token = localStorage.getItem('token');
-    return this.http.get(`${this.apiUrl}/profile`, {
+    // Utiliser /secret au lieu de /profile
+    return this.http.get(`${this.apiUrl}/secret`, {
       headers: { 'Authorization': token || '' }
-    });
+    }).pipe(
+      map((response: any) => {
+        // Transformer la réponse de /secret en format profil
+        return {
+          
+          // Autres informations du profil
+        };
+      })
+    );
   }
-
+  
   updateProfile(updates:{nom?:string, prenom?:string}){
     const token = localStorage.getItem('token');
     return this.http.patch(`${this.apiUrl}/profile`, updates, {

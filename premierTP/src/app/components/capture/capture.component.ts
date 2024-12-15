@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
@@ -13,6 +13,7 @@ import { ActiviteService } from '../../services/activite.service';
   styleUrl: './capture.component.css'
 })
 export class CaptureComponent implements OnInit{
+  @ViewChild('manualForm') manualForm!: NgForm;
   description = '';
   currentActivity: any = null;
   manualEntry = {
@@ -79,18 +80,31 @@ export class CaptureComponent implements OnInit{
   }
 
   createManualEntry() {
-    this.activiteService.createManualEntry(this.manualEntry).subscribe({
-      next: () => {
-        console.log('Entrée manuelle créée');
-        // Réinitialiser le formulaire
-        this.manualEntry = {
-          description: '',
-          start: '',
-          end: ''
-        };
-      },
-      error: (error) => console.error('Erreur:', error)
-    });
-  }
+    console.log('Création entrée manuelle:', this.manualEntry);
+    if (!this.manualForm.valid) return;
 
+    // Formater les dates en ISO string
+    const formattedData = {
+        description: this.manualEntry.description,
+        start: new Date(this.manualEntry.start).toISOString(),
+        end: new Date(this.manualEntry.end).toISOString()
+    };
+
+    console.log('Données formatées:', formattedData);
+
+    this.activiteService.createManualEntry(formattedData).subscribe({
+        next: (response) => {
+            console.log('Entrée créée avec succès:', response);
+            // Réinitialiser le formulaire
+            this.manualEntry = {
+                description: '',
+                start: '',
+                end: ''
+            };
+        },
+        error: (error) => {
+            console.error('Erreur détaillée:', error);
+        }
+    });
+}
 }

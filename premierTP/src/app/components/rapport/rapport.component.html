@@ -1,0 +1,43 @@
+<!-- rapport.component.html -->
+<div class="container mt-4">
+    <h2>Rapport des activités</h2>
+  
+    <table mat-table [dataSource]="activities" class="w-100">
+      <!-- Description Column -->
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Description</th>
+        <td mat-cell *matCellDef="let activity">{{activity.description}}</td>
+      </ng-container>
+  
+      <!-- Start Time Column -->
+      <ng-container matColumnDef="startTime">
+        <th mat-header-cell *matHeaderCellDef>Début</th>
+        <td mat-cell *matCellDef="let activity">
+          {{formatDateTime(activity.startTime)}}
+        </td>
+      </ng-container>
+  
+      <!-- End Time Column -->
+      <ng-container matColumnDef="endTime">
+        <th mat-header-cell *matHeaderCellDef>Fin</th>
+        <td mat-cell *matCellDef="let activity">
+          {{formatDateTime(activity.endTime)}}
+        </td>
+      </ng-container>
+  
+      <!-- Progress Column -->
+      <ng-container matColumnDef="progress">
+        <th mat-header-cell *matHeaderCellDef>Durée relative</th>
+        <td mat-cell *matCellDef="let activity">
+          <mat-progress-bar 
+            mode="determinate" 
+            [value]="calculateProgress(activity.duration)">
+          </mat-progress-bar>
+          <small>{{calculateProgress(activity.duration).toFixed(0)}}%</small>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="['description', 'startTime', 'endTime', 'progress']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['description', 'startTime', 'endTime', 'progress'];"></tr>
+    </table>
+  </div>

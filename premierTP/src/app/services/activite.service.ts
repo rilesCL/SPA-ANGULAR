@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environments';
 import { Observable, Subject, tap } from 'rxjs';
+import { ErrorHandlerService } from './error-handler.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,11 @@ export class ActiviteService {
   activityStateChanged$ = this.activityStateChanged.asObservable();
 
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private error : ErrorHandlerService
+
+  ) {}
 
   demarrerActivite(description:string){
     const token = localStorage.getItem('token');

@@ -4,6 +4,7 @@ import { BehaviorSubject, catchError, Observable } from 'rxjs';
 import { tap } from 'rxjs';
 import { environment } from '../../environments/environments';
 import { response } from 'express';
+import { ErrorHandlerService } from './error-handler.service';
 
 
 
@@ -17,7 +18,8 @@ export class AuthService {
   
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private errorHandler: ErrorHandlerService
     
   ) {
     console.log('AuthService créé !');
@@ -47,11 +49,10 @@ export class AuthService {
           this.verifyToken();
         }),
         catchError((error) => {
-            this.handleError(error);
-            throw error;
+          return this.errorHandler.handleError(error);
         })
-    );
-}
+      );
+    }
 logout(): Observable<any> {
   const token = localStorage.getItem('token');
   const headers = { 'Authorization': token || '' };
@@ -62,11 +63,10 @@ logout(): Observable<any> {
               this.clearSession();
           }),
           catchError((error) => {
-              this.handleError(error);
-              throw error;
+            return this.errorHandler.handleError(error);
           })
-      );
-}
+        );
+      }
 
   private verifyToken() {
     const token = localStorage.getItem('token');

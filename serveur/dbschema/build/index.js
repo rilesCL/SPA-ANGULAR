@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.myapiservice = void 0;
 const baseserver_1 = require("./common/baseserver");
 // IMPORTANT : IF YOU NEED TO MODIFY baseserver.ts or bigquery.ts you MUST TEST OTHER SERVICE AND ALIGN ALL OF THEM
-const secret = "fjk245jfmkA";
+const secret = "kS3i2gPq9vL5nM8x";
 class MyAPI extends baseserver_1.SimpleBaseService {
     // Effectue la request, typiquement la seule place a modifier.
     execute() {
@@ -42,7 +42,7 @@ class MyAPI extends baseserver_1.SimpleBaseService {
             else {
                 throw ({ error: 400, msg: "Mode invalide" });
             }
-            this.send_success_raw(this.res, data || data[0]);
+            this.send_success(this.res, data || data[0]);
         });
     }
 }

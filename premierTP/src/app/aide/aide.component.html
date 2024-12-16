@@ -1,45 +1,44 @@
-<div class="container my-5">
-    <h1 class="text-center mb-4">{{myAide.nom}}</h1>
-</div>
-
-<div class="accordion" id="aideAcc">
-    @for (aide of myAide.vues; track $index) {
-    <div class="accordion-item">
-        <h2 class="accordion-header" [id]="'heading' + $index">
-            <button 
-                class="accordion-button collapsed" 
-                type="button" 
-                data-bs-toggle="collapse" 
-                [attr.data-bs-target]="'#collapse' + $index"
-                aria-expanded="false"
-                aria-controls="'collapse' + $index">
-                {{aide.nom}}
-            </button>
-        </h2>
-        <div [id]="'collapse' + $index" class="accordion-collapse collapse" 
-            data-bs-parent="#aideAcc">
-            <div class="accordion-body">
+<!-- aide.component.html -->
+@if(aide) {
+    <div class="container my-5">
+      <h1 class="text-center mb-4">{{aide.application.nom}}</h1>
+      <p>{{aide.application.description}}</p>
+  
+      <div class="accordion" id="aideAcc">
+        @for(vue of vues | keyvalue; track trackByKey($index, vue)) {
+          <div class="accordion-item">
+            <h2 class="accordion-header" [id]="'heading' + vue.key">
+              <button 
+                class="accordion-button"
+                [class.collapsed]="!estSectionOuverte(vue.key)"
+                type="button"
+                (click)="afficherSection(vue.key)">
+                {{vue.value.nom}}
+              </button>
+            </h2>
+            
+            <div [id]="'collapse' + vue.key" 
+                 class="accordion-collapse collapse"
+                 [class.show]="estSectionOuverte(vue.key)">
+              <div class="accordion-body">
                 <h2>Fonctionnalité:</h2>
-                <p>{{aide.fonctionnalite}}</p>
-                <app-composants [composants]="aide.composants">
-                </app-composants>
+                <p>{{vue.value.fonctionnalite}}</p>
                 
-                <app-fonctionnement
-                [fonctionnement]="aide.fonctionnement"
-                ></app-fonctionnement>
-
-                @if (aide.typesRapports) {
-                    <h2>Rapports</h2>
-                    <ul class="list-group">
-                        @for (rapport of aide.typesRapports; track $index) {
-                            <li class="list-group-item">
-                                {{rapport}}
-                            </li>
-                        }
-                    </ul>
+                <app-composants [composants]="vue.value.composants"></app-composants>
+                <app-fonctionnement [fonctionnement]="vue.value.fonctionnement"></app-fonctionnement>
+  
+                @if(vue.value.typesRapports?.length) {
+                  <h2>Rapports</h2>
+                  <ul class="list-group">
+                    @for(rapport of vue.value.typesRapports; track $index) {
+                      <li class="list-group-item">{{rapport}}</li>
+                    }
+                  </ul>
                 }
+              </div>
             </div>
-        </div>
+          </div>
+        }
+      </div>
     </div>
-    }
-</div>
+  }

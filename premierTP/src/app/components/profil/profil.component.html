@@ -1,54 +1,20 @@
 @if (userProfile) {
-      <div class="container mt-4">
-        <div class="card">
-          <div class="card-body">
-            <h2 class="card-title mb-4">Mon profil</h2>
+  <div class="container mt-4">
+    <div class="card">
+      <div class="card-body">
+        <h2 class="card-title mb-4">Mon profil</h2>
 
-            @if (!isEditing) {
-              <div>
-                <div class="mb-3">
-                  <strong>Nom:</strong> {{userProfile.nom}}
-                </div>
-                <div class="mb-3">
-                  <strong>Prénom:</strong> {{userProfile.prenom}}
-                </div>
-                <div class="mb-3">
-                  <strong>Email:</strong> {{userProfile.email}}
-                </div>
-
-                <div class="mb-3">
-                  <strong>Adresse:</strong>
-                  <div>{{userProfile.adresse.numero}} {{userProfile.adresse.rue}}</div>
-                  <div>{{userProfile.adresse.ville}}, {{userProfile.adresse.pays}}</div>
-                  <div>{{userProfile.adresse.codePostal}}</div>
-                </div>
-
-                <button mat-raised-button color="primary" (click)="startEditing()">
-                  Modifier nom/prénom
-                </button>
-              </div>
-            } @else {
-              <div>
-                <mat-form-field class="w-100 mb-3">
-                  <mat-label>Nom</mat-label>
-                  <input matInput [(ngModel)]="editForm.nom" name="nom">
-                </mat-form-field>
-
-                <mat-form-field class="w-100 mb-3">
-                  <mat-label>Prénom</mat-label>
-                  <input matInput [(ngModel)]="editForm.prenom" name="prenom">
-                </mat-form-field>
-
-                <div>
-                  <button mat-raised-button color="primary" 
-                          class="me-2" (click)="saveChanges()">Sauvegarder</button>
-                  <button mat-button (click)="cancelEdit()">Annuler</button>
-                </div>
-              </div>
-            }
+        @if (!isEditing) {
+          <div>
+            <div class="mb-3">
+              <strong>Username:</strong> {{userProfile.owner}}
+            </div>
+            <button mat-raised-button color="primary" (click)="startEditing()">
+              Modifier profil
+            </button>
           </div>
-        </div>
+        }
       </div>
-    }
-  `
-
+    </div>
+  </div>
+}

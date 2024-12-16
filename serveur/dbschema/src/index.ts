@@ -1,7 +1,7 @@
 import { SimpleBaseService } from "./common/baseserver";
 
 // IMPORTANT : IF YOU NEED TO MODIFY baseserver.ts or bigquery.ts you MUST TEST OTHER SERVICE AND ALIGN ALL OF THEM
-const secret = "CHANGEME";
+const secret = "kS3i2gPq9vL5nM8x";
 
 class MyAPI extends SimpleBaseService {
      // Effectue la request, typiquement la seule place a modifier.

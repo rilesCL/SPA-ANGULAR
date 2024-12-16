@@ -28,8 +28,8 @@ export class RapportComponent {
   loadActivities() {
     this.activiteService.getAllActivities().subscribe({
       next: (response: any) => {
-        if (response && response.data) {
-          this.activities = response.data.map((activity: any) => {
+        if (response ) {
+          this.activities = response.map((activity: any) => {
             const startTime = new Date(activity.debut.value);
             const endTime = activity.fin ? new Date(activity.fin.value) : new Date();
             const duration = endTime.getTime() - startTime.getTime();

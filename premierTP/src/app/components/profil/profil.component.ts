@@ -22,10 +22,6 @@ import { FormsModule } from '@angular/forms';
 export class ProfilComponent implements OnInit {
   userProfile: any = null;
   isEditing = false;
-  editForm = {
-    nom: '',
-    prenom: ''
-  };
 
   constructor(private userService: UserService) {}
 
@@ -34,37 +30,24 @@ export class ProfilComponent implements OnInit {
   }
 
   loadProfile() {
+    console.log('Début loadProfile');
     this.userService.getUserProfile().subscribe({
-      next: (profile) => {
-        this.userProfile = profile;
-      },
-      error: (err) => console.error('Erreur chargement profil:', err)
+        next: (response: any) => {
+            console.log('Réponse complète:', response);
+            if (response) {
+                console.log('Data trouvée:', response);
+                this.userProfile = response;
+            } else {
+                console.log('Pas de data dans la réponse');
+            }
+        },
+        error: (err) => {
+            console.error('Erreur détaillée:', err);
+        }
     });
-  }
+}
 
-  startEditing() {
-    this.editForm = {
-      nom: this.userProfile.nom,
-      prenom: this.userProfile.prenom
-    };
+  startEditing() {  // Ajout de la méthode manquante
     this.isEditing = true;
-  }
-
-  cancelEdit() {
-    this.isEditing = false;
-    this.editForm = {
-      nom: '',
-      prenom: ''
-    };
-  }
-
-  saveChanges() {
-    this.userService.updateProfile(this.editForm).subscribe({
-      next: () => {
-        this.isEditing = false;
-        this.loadProfile();  // Recharger le profil
-      },
-      error: (err) => console.error('Erreur mise à jour:', err)
-    });
   }
 }

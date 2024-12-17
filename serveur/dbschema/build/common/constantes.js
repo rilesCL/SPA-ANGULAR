@@ -4,6 +4,11 @@ exports.CONFIGURATION = void 0;
 class CONFIGURATION {
 }
 exports.CONFIGURATION = CONFIGURATION;
-CONFIGURATION.PROJET = 'ghilas-first'; // Votre projet
-CONFIGURATION.REGIONLOCATION = 'northamerica-northeast1'; // La région où votre dataset est créé
-CONFIGURATION.DATASET = 'tp3_profiles'; // Le dataset qu'on a créé plus tôt
+/*
+static readonly PROJET = 'web345-a23';  // CECI EST LE NOM DU PROJET DANS GOOGLE CLOUD
+static readonly REGIONLOCATION = 'northamerica-northeast1'; // CECI EST LA REGION OU SE TROUVE LE PROJET
+static readonly DATASET = 'web'; // CECI EST LE NOM DE LA BASE DE DONNEES DANS GOOGLE CLOUD
+*/
+CONFIGURATION.PROJET = 'ghilas-first'; // CECI EST LE NOM DU PROJET DANS GOOGLE CLOUD
+CONFIGURATION.REGIONLOCATION = 'northamerica-northeast1'; // CECI EST LA REGION OU SE TROUVE LE PROJET
+CONFIGURATION.DATASET = 'tp3_profiles'; // CECI EST LE NOM DE LA BASE DE DONNEES DANS GOOGLE CLOUD

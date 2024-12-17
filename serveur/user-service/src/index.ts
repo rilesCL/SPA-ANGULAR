@@ -3,6 +3,16 @@ import axios from 'axios';
 
 class MyAPI extends SimpleBaseService {
     private apiUrl = 'https://us-central1-cegep-al.cloudfunctions.net';
+    constructor(req: any, res: any, methodes: string = "GET") {  // Ajout du paramètre methodes avec valeur par défaut
+        super(req, res, methodes); 
+        // Configuration CORS complète
+        this.res.header("Access-Control-Allow-Origin", "*");
+        this.res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE,PATCH,OPTIONS");
+        this.res.header(
+            "Access-Control-Allow-Headers", 
+            "Origin, X-Requested-With, Content-Type, Accept, Authorization, X-Secret-Key"
+        );
+    }
 
     async execute() {
         try {
@@ -10,17 +20,28 @@ class MyAPI extends SimpleBaseService {
             if (!token) {
                 throw { error: 401, msg: "Token manquant" };
             }
-            console.log('Token reçu:', token);
     
             // Vérifier avec l'API secret
             const secretResponse = await axios.get(`${this.apiUrl}/secret`, {
                 headers: { Authorization: token }
             });
-            console.log('Réponse complète secret:', secretResponse.data); // Ajout de ce log
+            const username = secretResponse.data.owner;
     
-            // La structure correcte est différente
-            const username = secretResponse.data.owner; // Retiré .data.data
-            console.log('Username extrait:', username);
+            // Traiter selon la méthode
+            if (this.req.method === 'GET') {
+                console.log('Getting profile for:', username);
+                const results = await this.myDB.queryDB({
+                    table: 'user_profiles',
+                    where: `userid = '${username}'`,
+                    fields: 'userid, nom, prenom'  // Spécifier les champs explicitement
+                });
+                
+                console.log('Query results:', results);
+                return this.send_success(this.res, {
+                    msg: "Profil récupéré",
+                    profile: results[0] || null
+                });
+            }
     
             if (this.req.method === 'PATCH') {
                 const { nom, prenom } = this.req.body;

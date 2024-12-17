@@ -7,7 +7,7 @@
 
 ## **2. URL des Fonctions Nuagiques**
 - **Nom de la Fonction** : `user-service`
-  - **URL** : [text](https://us-central1-ghilas-first.cloudfunctions.net/dbschema?table=user_profiles&clef=kS3i2gPq9vL5nM8x&mode=schema)
+  - **URL** : (https://us-central1-ghilas-first.cloudfunctions.net/dbschema?table=user_profiles&clef=kS3i2gPq9vL5nM8x&mode=schema)
 
 
 ---

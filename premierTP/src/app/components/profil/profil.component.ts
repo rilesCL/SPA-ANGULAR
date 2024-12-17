@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
+import { ProfilService } from '../../services/profil.service';
 
 @Component({
   selector: 'app-profil',
@@ -20,34 +21,59 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './profil.component.css'
 })
 export class ProfilComponent implements OnInit {
-  userProfile: any = null;
+  profile: any;
   isEditing = false;
+  editForm = {
+    nom: '',
+    prenom: ''
+  };
 
-  constructor(private userService: UserService) {}
+  constructor(private profilService: ProfilService) {}
 
   ngOnInit() {
     this.loadProfile();
   }
 
   loadProfile() {
-    console.log('Début loadProfile');
-    this.userService.getUserProfile().subscribe({
-        next: (response: any) => {
-            console.log('Réponse complète:', response);
-            if (response) {
-                console.log('Data trouvée:', response);
-                this.userProfile = response;
-            } else {
-                console.log('Pas de data dans la réponse');
-            }
-        },
-        error: (err) => {
-            console.error('Erreur détaillée:', err);
-        }
+    console.log('Chargement du profil...');
+    this.profilService.getProfile().subscribe({
+      next: (response: any) => {
+        console.log('Réponse complète:', response);
+        this.profile = response.profile;
+        console.log('Profile chargé:', this.profile);
+      },
+      error: (err) => {
+        console.error('Erreur détaillée:', err);
+        // Si erreur CORS, on le verra ici
+      }
     });
 }
 
-  startEditing() {  // Ajout de la méthode manquante
+  startEditing() {
+    this.editForm = {
+      nom: this.profile?.nom || '',
+      prenom: this.profile?.prenom || ''
+    };
     this.isEditing = true;
   }
+
+  cancelEdit() {
+    this.isEditing = false;
+  }
+
+  saveProfile() {
+    console.log('Tentative de sauvegarde:', this.editForm);
+    this.profilService.updateProfile(this.editForm).subscribe({
+      next: (response: any) => {
+        console.log('Sauvegarde réussie:', response);
+        this.isEditing = false;
+        this.loadProfile();
+      },
+      error: (err) => {
+        console.error('Erreur détaillée:', err);
+        // Optionnellement, afficher un message d'erreur à l'utilisateur
+      }
+    });
+  }
 }
+

@@ -24,7 +24,8 @@ export const routes: Routes = [
         {path: 'rapport', component: RapportComponent,
             canActivate: [AuthGuard]
          },
-        { path: 'profil', component: ProfilComponent
+        { path: 'profil', component: ProfilComponent,
+            canActivate: [AuthGuard]
             
          },
         {path: 'aide', component: AideComponent

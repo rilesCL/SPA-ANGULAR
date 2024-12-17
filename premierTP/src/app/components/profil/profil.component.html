@@ -1,20 +1,38 @@
-@if (userProfile) {
-  <div class="container mt-4">
-    <div class="card">
-      <div class="card-body">
-        <h2 class="card-title mb-4">Mon profil</h2>
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-body">
+      <h2 class="card-title">Mon Profil</h2>
+      
+      @if (!isEditing) {
+        <div>
+          <p><strong>Nom:</strong> {{profile?.nom}}</p>
+          <p><strong>Prénom:</strong> {{profile?.prenom}}</p>
+          <button mat-raised-button color="primary" (click)="startEditing()">
+            Modifier
+          </button>
+        </div>
+      } @else {
+        <form (ngSubmit)="saveProfile()">
+          <mat-form-field class="w-100 mb-3">
+            <mat-label>Nom</mat-label>
+            <input matInput [(ngModel)]="editForm.nom" name="nom" required>
+          </mat-form-field>
 
-        @if (!isEditing) {
+          <mat-form-field class="w-100 mb-3">
+            <mat-label>Prénom</mat-label>
+            <input matInput [(ngModel)]="editForm.prenom" name="prenom" required>
+          </mat-form-field>
+
           <div>
-            <div class="mb-3">
-              <strong>Username:</strong> {{userProfile.owner}}
-            </div>
-            <button mat-raised-button color="primary" (click)="startEditing()">
-              Modifier profil
+            <button mat-raised-button color="primary" type="submit" class="me-2">
+              Sauvegarder
+            </button>
+            <button mat-button (click)="cancelEdit()">
+              Annuler
             </button>
           </div>
-        }
-      </div>
+        </form>
+      }
     </div>
   </div>
-}
+</div>

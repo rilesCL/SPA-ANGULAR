@@ -22,7 +22,6 @@ export class CONFIGURATION {
 }
 
 ## **4. Autres Informations**
-- **Base de Données (DB Schema)** : [Insérez les informations ici]
 - **Région de Déploiement** : 'northamerica-northeast1'
 - **Nom du Projet Firebase** : neymarlaurendeau.web.app
 
@@ -32,3 +31,7 @@ export class CONFIGURATION {
 ---
 
 **Gestion des erreurs** : Les erreurs sont capturées et traitées par le service Error-Handler.service
+
+**Video** : La video vous est partagé sur OneDrive/Teams
+
+Matricule : 6194975
